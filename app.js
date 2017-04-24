@@ -36,7 +36,7 @@ var path = require('path');
 var app = express();
 
 //set the root folder
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));
 
 //to set vars
 app.set('port', 3000);
@@ -60,7 +60,7 @@ app.get('/json', function (req, res) {
 var server = app.listen(app.get('port'), function () {
     var port = server.address().port;
     console.log('active in port ' + port);
-})
+});
 
 
 
