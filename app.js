@@ -17,7 +17,6 @@
 //
 // goodbye();
 
-
 // FIRSTS STEPS WITH NODE
 // var fs = require('fs');
 //
@@ -33,14 +32,34 @@
 // console.log("Meanwhile, app continues");
 
 var express = require('express');
+var path = require('path');
 var app = express();
+
+//set the root folder
+app.use(express.static(path.join(__dirname, 'public')))
 
 //to set vars
 app.set('port', 3000);
 
+//get method to index
+app.get('/', function (req, res) {
+    console.log("GET the Homepage");
+    res
+        .status(200)
+        .sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+// get method to json
+app.get('/json', function (req, res) {
+    console.log('GET the json');
+    res
+        .status(200)
+        .json( {"jsonData" : true} );
+});
+
 //where port listen requests
-app.listen(app.get('port'), function () {
-    console.log('active in port' + app.get('port'));
+var server = app.listen(app.get('port'), function () {
+    var port = server.address().port;
+    console.log('active in port ' + port);
 })
 
 
