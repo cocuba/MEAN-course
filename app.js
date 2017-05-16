@@ -35,11 +35,17 @@ var express = require('express');
 var path = require('path');
 var app = express();
 
+//set vars
+app.set('port', 3000);
+
+// middleware to see requests and responses from the web
+app.use(function (req, res, next) {
+    console.log(req.method, req.url);
+    next();
+});
+
 //set the root folder
 app.use(express.static(path.join(__dirname, 'public')));
-
-//to set vars
-app.set('port', 3000);
 
 //get method to index
 app.get('/', function (req, res) {
